@@ -15,10 +15,10 @@ const App = () => {
   },[results]);
 
   return (
-    <div className="App">
+    <div className="h-screen">
       <Header />
       <Welcome />
-      {load ? <History {...results}/> : <p>Loading Data</p>}
+      {load ? <History {...results}/> : <p>Loading results make sure connect your wallet : )</p>}
       <Footer />
     </div>
   )
