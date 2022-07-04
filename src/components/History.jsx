@@ -8,12 +8,11 @@ const History = (results)=>{
             <br/>
 
             {resArr.map((ele,i)=>{
-                // console.log(`https://ipfs.infura.io/ipfs/${ele.fileHash}`)
+                //  console.log(`https://gateway.ipfs.io/ipfs/${ele.fileHash}`)
                 // return <p key={i}>fileName : {ele.fileName} <br/> <a  rel="noreferrer" target={"_blank"} href={`http://ipfs.infura.io/ipfs/${ele.fileHash}` } >Result {i}</a></p>
                 return <div key={i}>
-                    {i===4 && <CsvReader  file={`https://ipfs.infura.io/ipfs/${ele.fileHash}`}/>}
+                    {i===4 && <CsvReader  file={`https://gateway.ipfs.io/ipfs/${ele.fileHash}`}/>}
                 </div>
-
             })}
         </div>
     )
