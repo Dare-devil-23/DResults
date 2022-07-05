@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { contractAbi, contractAddress } from "../utils/constants";
-import { create }  from "ipfs-http-client";
-import {Buffer} from 'buffer';
+import { create } from "ipfs-http-client";
+import { Buffer } from "buffer";
 
 export const TransactionContext = React.createContext();
 
@@ -23,44 +23,46 @@ const getEthereumContract = () => {
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState();
   const [owner, setOwner] = useState(false);
-  const [isLoading , setIsLoading] = useState(false);
-  const [file , setFile] = useState();
-  const [results , updateResults] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [file, setFile] = useState();
+  const [results, updateResults] = useState();
 
-  const projectId = '2AhShJearHhtHEN7bQIKAgZSPq3';
-  const projectSecret = '756a8a0325b67d514195d9b238f27bd3';
+  const projectId = "2AhShJearHhtHEN7bQIKAgZSPq3";
+  const projectSecret = "756a8a0325b67d514195d9b238f27bd3";
   const auth =
-      'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+    "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
 
   const client = create({
-      host: 'ipfs.infura.io',
-      port: 5001,
-      protocol: 'https',
-      headers: {
-          authorization: auth,
-      },
+    host: "ipfs.infura.io",
+    port: 5001,
+    protocol: "https",
+    headers: {
+      authorization: auth,
+    },
   });
 
-  const uploadToIpfs = async ()=>{
-
+  const uploadToIpfs = async () => {
     const ipfs = client;
 
     const options = {
-        warpWithDirectory: false,
-    }
+      warpWithDirectory: false,
+    };
     const result = await ipfs.add(file, options);
 
     return result.path;
+  };
 
-  }
-
-  const uploadFile = (e)=>{
+  const uploadFile = (e) => {
     e.preventDefault();
-    sendTransaction();
-  }
-  const handleChange = (e)=>{
-    setFile(e.target.files[0])
-  }
+    if (e.target.files) {
+      sendTransaction();
+    } else {
+      return window.alert("Please choose file before uploading");
+    }
+  };
+  const handleChange = (e) => {
+    setFile(e.target.files[0]);
+  };
 
   const sendTransaction = async () => {
     try {
@@ -83,7 +85,12 @@ export const TransactionProvider = ({ children }) => {
         ],
       });
 
-      const transactionHash = await transactionsContract.uploadResults(owner , owner , fileHash , fileName );
+      const transactionHash = await transactionsContract.uploadResults(
+        owner,
+        owner,
+        fileHash,
+        fileName
+      );
 
       setIsLoading(true);
       await transactionHash.wait();
@@ -98,20 +105,19 @@ export const TransactionProvider = ({ children }) => {
     }
   };
 
-  const getAllResults = async ()=>{
+  const getAllResults = async () => {
     try {
       if (!ethereum) return "Please install MetaMask";
       const transactionsContract = getEthereumContract();
       const results = await transactionsContract.getHistory();
 
-      if(results) (updateResults(results))
-      
+      if (results) updateResults(results);
     } catch (error) {
       console.log(error);
 
       throw new Error("No ethereum object");
     }
-  }
+  };
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -119,7 +125,6 @@ export const TransactionProvider = ({ children }) => {
       const accounts = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
-        
       } else {
         console.log("No Accounts Found!");
       }
@@ -139,7 +144,7 @@ export const TransactionProvider = ({ children }) => {
       });
 
       setCurrentAccount(accounts[0]);
-      
+
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -167,10 +172,19 @@ export const TransactionProvider = ({ children }) => {
     checkIfWalletIsConnected();
     checkOwner();
     getAllResults();
-  },[]);
+  }, []);
   return (
     <TransactionContext.Provider
-      value={{ connectWallet, currentAccount, owner, sendTransaction ,handleChange , uploadFile , results , isLoading}}
+      value={{
+        connectWallet,
+        currentAccount,
+        owner,
+        sendTransaction,
+        handleChange,
+        uploadFile,
+        results,
+        isLoading,
+      }}
     >
       {children}
     </TransactionContext.Provider>

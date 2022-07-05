@@ -6,15 +6,15 @@ const Welcome = () => {
   const { connectWallet, currentAccount, owner } =
     useContext(TransactionContext);
   return (
-    <div className="h-2/5">
+    <div className="h-fit">
       {!currentAccount ? (
-        <div>
-          <button type="button" onClick={connectWallet}>
+        <div className="h-full flex justify-center p-10 m-10">
+          <button type="button" onClick={connectWallet} className="text-white bg-gradient-to-b from-blue-500 p-5 rounded-full">
             Connect
           </button>
         </div>
       ) : (
-        <div>{currentAccount === owner ? <Owner /> : <Student />}</div>
+        <div className="bg-zinc-800 h-full">{currentAccount === owner ? <Owner /> : <Student />}</div>
       )}
     </div>
   );

@@ -9,54 +9,34 @@ const CsvReader = (file) => {
       .then((response) => response.text())
       .then((v) =>
         Papa.parse(v, {
-          delimiter: " ",
+          delimiter: ",",
+          skipEmptyLines: true,
         })
       )
       .catch((err) => console.log(err));
 
     response.then((v) => setResults(v.data));
   }, []);
+  // console.log(results)
   return (
-    <div>
-      <table>
+    <div className="flex justify-center w-full">
+      <table className="w-full">
         <thead>
-          <tr>
-            {results &&
-              results[0].map((row, index) => {
-                row = row.split(",");
-                return (
-                  <th key={index}>
-                    {row.map((item, i) => {
-                      return (
-                        <span className="p-10 justify-center" key={i}>
-                          {item}
-                        </span>
-                      );
-                    })}
-                  </th>
-                );
+          {results && (
+            <tr>
+              {results[0].map((ele, i) => {
+                return <th key={i} className="p-2">{ele}</th>;
               })}
-          </tr>
+            </tr>
+          )}
         </thead>
-        <tbody>
+        <tbody >
           {results &&
-            
-            results.slice(1,results.length).map((rows, i) => {
+            results.slice(1, results.length).map((rows, i) => {
               return (
-                <tr key={i}>
-                  {rows.map((row, index) => {
-                    row = row.split(",");
-                    return (
-                      <td key={index}>
-                        {row.map((item, i) => {
-                          return (
-                            <span className="p-10 justify-center" key={i}>
-                              {item}
-                            </span>
-                          );
-                        })}
-                      </td>
-                    );
+                <tr key={i} >
+                  {rows.map((ele, i) => {
+                    return <td key={i} className="items-center text-center p-2">{ele}</td>;
                   })}
                 </tr>
               );

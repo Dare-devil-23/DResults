@@ -15,10 +15,10 @@ const App = () => {
   },[results]);
 
   return (
-    <div className="h-screen">
+    <div className="h-screen scroll-smooth bg-black overflow-x-hidden">
       <Header />
       <Welcome />
-      {load ? <History {...results}/> : <p>Loading results make sure connect your wallet : )</p>}
+      {load ? <History {...results}/> : <p className='flex justify-center text-sm text-white h-[80%] sm:text-xl'>Loading results make sure connect your wallet : )</p>}
       <Footer />
     </div>
   )
