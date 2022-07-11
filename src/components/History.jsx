@@ -1,26 +1,41 @@
 import React from "react";
+import { useState } from "react";
 import CsvReader from "./CsvReader";
 const History = (results) => {
   const resArr = Object.keys(results).map((key) => results[key]);
+  const [displayResult, setDisplayResult] = useState();
   return (
     <div className="bg-zinc-800 text-white pb-32">
       <div className="flex p-5 items-center justify-center text-2xl font-bold">
         Available Results
       </div>
+      <div className="flex justify-center flex-col m-10">
+        {resArr.map((ele, i) => {
+          return (
+            <div key={i} className="flex justify-center">
+              <p
+                className="bg-black rounded-full w-1/2 flex justify-center cursor-pointer m-2 p-2 text-lg"
+                onClick={() => {
+                  setDisplayResult(
+                    `https://gateway.ipfs.io/ipfs/${ele.fileHash}`
+                  );
+                }}
+              >
+                Results {i + 1}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+      <div className="selectedResults">
         <div>
-      {resArr.map((ele, i) => {
-        //  console.log(`https://gateway.ipfs.io/ipfs/${ele.fileHash}`)
-        // return <p key={i}>fileName : {ele.fileName} <br/> <a  rel="noreferrer" target={"_blank"} href={`http://ipfs.infura.io/ipfs/${ele.fileHash}` } >Result {i}</a></p>
-        return (
-          <div key={i}>
-            {i === 4 && (
-              <CsvReader
-                file={`https://gateway.ipfs.io/ipfs/${ele.fileHash}`}
-              />
-            )}
-          </div>
-        );
-      })}</div>
+          {displayResult ? (
+            <CsvReader file={displayResult} />
+          ) : (
+            <p className="flex justify-center text-lg">Select Any Results</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

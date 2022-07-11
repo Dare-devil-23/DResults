@@ -54,21 +54,14 @@ export const TransactionProvider = ({ children }) => {
 
   const uploadFile = (e) => {
     e.preventDefault();
-    if (file) {
+    if (e.target.files) {
       sendTransaction();
     } else {
       return window.alert("Please choose file before uploading");
     }
   };
   const handleChange = (e) => {
-    var filename = e.target.files[0];
-    // console.log(filename.name);
-    var parts = filename.name.split(".");
-    if (parts[parts.length - 1] === "csv") {
-      setFile(filename);
-    } else {
-      return window.alert("Upload Only .csv files");
-    }
+    setFile(e.target.files[0]);
   };
 
   const sendTransaction = async () => {

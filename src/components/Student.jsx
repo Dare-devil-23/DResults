@@ -7,8 +7,8 @@ const Student = () => {
           Get your data from decentralized IPFS network
         </h1>
       </div>
-      <div className="w-full p-10 sm:w-full justify-center flex">
-        <img src={heroimg} alt="IPFS" className="w-full h-full scale-[300%] sm:w-1/2 sm:h-1/2"/>
+      <div className="w-full p-10 m-0 sm:w-full justify-center flex">
+        <img src={heroimg} alt="IPFS" className="w-1/2 h-1/2"/>
       </div>
     </div>
   );

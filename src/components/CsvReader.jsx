@@ -19,13 +19,13 @@ const CsvReader = (file) => {
   }, []);
   // console.log(results)
   return (
-    <div className="flex justify-center w-full">
+    <div className="flex justify-center w-full sm:overflow-hidden overflow-scroll">
       <table className="w-full">
         <thead>
           {results && (
             <tr>
               {results[0].map((ele, i) => {
-                return <th key={i} className="p-2">{ele}</th>;
+                return <th key={i} className="py-2">{ele}</th>;
               })}
             </tr>
           )}
@@ -36,7 +36,7 @@ const CsvReader = (file) => {
               return (
                 <tr key={i} >
                   {rows.map((ele, i) => {
-                    return <td key={i} className="items-center text-center p-2">{ele}</td>;
+                    return <td key={i} className="items-center text-center py-2">{ele}</td>;
                   })}
                 </tr>
               );
