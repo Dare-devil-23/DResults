@@ -18,7 +18,7 @@ const CsvReader = (file) => {
 
     response.then((v) => setResults(v.data));
   }, []);
-  return <> {results && <Results results={results} />}</>;
+  return <> {results && <Results props={results} />}</>;
 };
 
 export default CsvReader;
