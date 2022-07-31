@@ -4,6 +4,7 @@ import CsvReader from "./CsvReader";
 const History = (results) => {
   const resArr = Object.keys(results).map((key) => results[key]);
   const [displayResult, setDisplayResult] = useState();
+  console.log(displayResult)
   return (
     <div className="bg-zinc-800 text-white pb-32">
       <div className="flex p-5 items-center justify-center text-2xl font-bold">
@@ -14,9 +15,7 @@ const History = (results) => {
           return (
             <div key={i} className="flex justify-center">
               <p
-                className={
-                  `bg-black rounded-full w-1/2 flex justify-center cursor-pointer m-2 p-2 text-lg`
-                }
+                className="bg-black rounded-full w-1/2 flex justify-center cursor-pointer m-2 p-2 text-lg"
                 onClick={() => {
                   setDisplayResult(
                     `https://gateway.ipfs.io/ipfs/${ele.fileHash}`

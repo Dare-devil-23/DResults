@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Results = (results) => {
   const [idNum, setIdNum] = useState();
   const [heads, setHeads] = useState();
   const [foundResult, setFoundResult] = useState([0]);
+  const [notFound , setNotFound] = useState(true);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -13,10 +14,12 @@ const Results = (results) => {
     e.preventDefault();
     setHeads(results.results[0]);
     setFoundResult(results.results.filter((r) => r[0] === idNum));
-    if(foundResult[0] === 0 ){
-      setFoundResult(['none'])
-    }
   };
+  useEffect(()=>{
+    if(foundResult[0] === 0){
+      setNotFound(!notFound);
+    }
+  },[results])
   return (
     <div>
       <div className="flex justify-center">
@@ -39,12 +42,12 @@ const Results = (results) => {
             })}
         </div>
         <div>
-          {foundResult[0] !== 'none' && foundResult[0] ? (
+          {foundResult[0] ? (
             foundResult[0].map((r, i) => {
               return <p key={i} className="p-1 m-2">{r}</p>;
             })
           ) : (
-            <>{foundResult[0] === 'none' || foundResult.length === 0 ? <div>Id Not Found</div> : <></>}</>
+            <>{notFound ? <div>Id Not Found</div> : <>ok</>}</>
           )}
         </div>
       </div>
@@ -53,3 +56,30 @@ const Results = (results) => {
 };
 
 export default Results;
+
+// <div className="flex justify-center w-full sm:overflow-hidden overflow-scroll">
+//       <table className="w-full">
+//         <thead>
+//           {results.results && (
+//             <tr>
+//               {results.results[0].map((ele, i) => {
+//                 return <th key={i} className="py-2">{ele}</th>;
+//               })}
+//             </tr>
+//           )}
+//         </thead>
+//         <tbody >
+//           {results.results &&
+//             results.results.slice(1, results.results.length).map((rows, i) => {
+//               return (
+//                 <tr key={i} >
+//                   {rows.map((ele, i) => {
+//                     return <td key={i} className="items-center text-center py-2">{ele}</td>;
+//                   })}
+//                 </tr>
+//               );
+//             })}
+//         </tbody>
+//       </table>
+
+//     </div>

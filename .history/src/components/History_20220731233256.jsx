@@ -4,6 +4,7 @@ import CsvReader from "./CsvReader";
 const History = (results) => {
   const resArr = Object.keys(results).map((key) => results[key]);
   const [displayResult, setDisplayResult] = useState();
+  const [active , setActive] = useState('');
   return (
     <div className="bg-zinc-800 text-white pb-32">
       <div className="flex p-5 items-center justify-center text-2xl font-bold">

@@ -5,7 +5,12 @@ import Results from "./Results";
 
 const CsvReader = (file) => {
   const [results, setResults] = useState();
+  const [loading , setLoading] = useState();
+  
   useEffect(() => {
+    setLoading(true);
+    setTimeout(response , 1000);
+    response.then((v)=> setResults(v.data));
     const response = fetch(file?.file)
       .then((response) => response.text())
       .then((v) =>
@@ -15,8 +20,8 @@ const CsvReader = (file) => {
         })
       )
       .catch((err) => console.log(err));
-      
-      response.then((v)=> setResults(v.data));
+    setLoading(false);
+
   }, [file]);
   return <> {results && <Results results={results} />}</>;
 };

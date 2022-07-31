@@ -15,9 +15,9 @@ const CsvReader = (file) => {
         })
       )
       .catch((err) => console.log(err));
-      
-      response.then((v)=> setResults(v.data));
-  }, [file]);
+
+    response.then((v) => setResults(v.data));
+  }, []);
   return <> {results && <Results results={results} />}</>;
 };
 

@@ -15,10 +15,10 @@ const CsvReader = (file) => {
         })
       )
       .catch((err) => console.log(err));
-      
-      response.then((v)=> setResults(v.data));
-  }, [file]);
-  return <> {results && <Results results={results} />}</>;
+
+    response.then(async (v)=> await setResults(v.data));
+  }, []);
+  return <> {console.log(results)}{results && <Results results={results} />}</>;
 };
 
 export default CsvReader;

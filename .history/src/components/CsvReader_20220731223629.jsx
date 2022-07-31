@@ -5,8 +5,8 @@ import Results from "./Results";
 
 const CsvReader = (file) => {
   const [results, setResults] = useState();
-  useEffect(() => {
-    const response = fetch(file?.file)
+  const [loading , setLoading] = useState();
+  const response = fetch(file?.file)
       .then((response) => response.text())
       .then((v) =>
         Papa.parse(v, {
@@ -15,8 +15,12 @@ const CsvReader = (file) => {
         })
       )
       .catch((err) => console.log(err));
-      
-      response.then((v)=> setResults(v.data));
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(response , 1000);
+    response.then((v)=> setResults(v.data));
+    setLoading(false);
+
   }, [file]);
   return <> {results && <Results results={results} />}</>;
 };

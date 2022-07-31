@@ -14,9 +14,7 @@ const History = (results) => {
           return (
             <div key={i} className="flex justify-center">
               <p
-                className={
-                  `bg-black rounded-full w-1/2 flex justify-center cursor-pointer m-2 p-2 text-lg`
-                }
+                className="bg-black rounded-full w-1/2 flex justify-center cursor-pointer m-2 p-2 text-lg"
                 onClick={() => {
                   setDisplayResult(
                     `https://gateway.ipfs.io/ipfs/${ele.fileHash}`
@@ -33,6 +31,7 @@ const History = (results) => {
         <div>
           {displayResult ? (
             <CsvReader file={displayResult} />
+            
           ) : (
             <p className="flex justify-center text-lg">Select any results mentioned above.</p>
           )}

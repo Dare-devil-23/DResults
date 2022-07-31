@@ -13,9 +13,10 @@ const Results = (results) => {
     e.preventDefault();
     setHeads(results.results[0]);
     setFoundResult(results.results.filter((r) => r[0] === idNum));
-    if(foundResult[0] === 0 ){
+    if(foundResult[0] === 0){
       setFoundResult(['none'])
     }
+    console.log(foundResult)
   };
   return (
     <div>
@@ -44,7 +45,7 @@ const Results = (results) => {
               return <p key={i} className="p-1 m-2">{r}</p>;
             })
           ) : (
-            <>{foundResult[0] === 'none' || foundResult.length === 0 ? <div>Id Not Found</div> : <></>}</>
+            <>{foundResult[0] === 'none' ? <div>Id Not Found</div> : <></>}</>
           )}
         </div>
       </div>

@@ -13,10 +13,8 @@ const History = (results) => {
         {resArr.map((ele, i) => {
           return (
             <div key={i} className="flex justify-center">
-              <p
-                className={
-                  `bg-black rounded-full w-1/2 flex justify-center cursor-pointer m-2 p-2 text-lg`
-                }
+              <a
+                className="bg-black rounded-full w-1/2 flex justify-center cursor-pointer m-2 p-2 text-lg"
                 onClick={() => {
                   setDisplayResult(
                     `https://gateway.ipfs.io/ipfs/${ele.fileHash}`
@@ -24,7 +22,7 @@ const History = (results) => {
                 }}
               >
                 Results {i + 1}
-              </p>
+              </a>
             </div>
           );
         })}
