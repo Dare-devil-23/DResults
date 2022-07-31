@@ -16,6 +16,8 @@ const Results = (results) => {
       setFoundResult(['none'])
     }
     setFoundResult(results.results.filter((r) => r[0] === idNum));
+    console.log(foundResult)
+    
   };
   return (
     <div>

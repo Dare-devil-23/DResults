@@ -12,10 +12,11 @@ const Results = (results) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setHeads(results.results[0]);
+    setFoundResult(results.results.filter((r) => r[0] === idNum));
+    console.log(foundResult)
     if(foundResult[0] === 0 ){
       setFoundResult(['none'])
     }
-    setFoundResult(results.results.filter((r) => r[0] === idNum));
   };
   return (
     <div>

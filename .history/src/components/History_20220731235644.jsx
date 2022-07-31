@@ -1,5 +1,5 @@
 import React from "react";
-import { useState , useEffect } from "react";
+import { useState } from "react";
 import CsvReader from "./CsvReader";
 const History = (results) => {
   const resArr = Object.keys(results).map((key) => results[key]);
